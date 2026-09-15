@@ -88,8 +88,8 @@ function createInitialGame(): GameState {
     winner: null,
     timeLeft: GAME_SECONDS,
     players: {
-      p1: { id: "p1", name: "Jugador 1", x: 15, y: 50, score: 0, energy: MAX_ENERGY, captured: 0 },
-      p2: { id: "p2", name: "Jugador 2", x: 85, y: 50, score: 0, energy: MAX_ENERGY, captured: 0 }
+      p1: { id: "p1", name: "Rojo", x: 15, y: 50, score: 0, energy: MAX_ENERGY, captured: 0 },
+      p2: { id: "p2", name: "Azul", x: 85, y: 50, score: 0, energy: MAX_ENERGY, captured: 0 }
     },
     chickens,
     message: "¡Atrapa las gallinas! El primero en llegar a 20 gana."
@@ -99,7 +99,7 @@ function createInitialGame(): GameState {
 function publicGame(): PublicGameState {
   return {
     ...game,
-    chickens: game.chickens.map(({ vx, vy, ...chicken }) => chicken)
+    chickens: game.chickens.map(({...chicken }) => chicken)
   };
 }
 
@@ -247,7 +247,7 @@ app.post("/api/game/capture", (req, res) => {
   if (player.score >= TARGET) {
     game.status = "finished";
     game.winner = playerId;
-    game.message = `El ${player.name} llegó a ${TARGET} puntos y ganó.`;
+    game.message = `El jugador ${player.name} llegó a ${TARGET} puntos y ganó.`;
   } else {
     game.message = chicken.kind === "trick"
       ? `${player.name} atrapó una gallina tramposa: -1 punto. y -10 de energia`
@@ -267,8 +267,6 @@ app.get("*splat", (_req, res) => {
 });
 
 const port = Number(process.env.PORT) || 3000;
-app.listen(port, () => {
-  console.log(`Catch the Chicken! disponible en http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Catch the Chicken! disponible en el puerto ${port}`);
 });
-
-setInterval(tick, 250);

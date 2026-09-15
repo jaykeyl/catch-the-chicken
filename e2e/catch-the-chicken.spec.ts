@@ -3,9 +3,9 @@ import { test, expect } from "@playwright/test";
 test("inicia una partida y muestra el juego", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /Catch the Chicken!/i })).toBeVisible();
-  await expect(page.getByText(/PRIMERO A 20/i)).toBeVisible();
-  await expect(page.getByText("🟥 Jugador 1", { exact: true })).toBeVisible();
-  await expect(page.getByText("🟦 Jugador 2", { exact: true })).toBeVisible();
+  await expect(page.getByText(/GANA: EL PRIMERO EN LLEGAR A 20/i)).toBeVisible();
+  await expect(page.getByText("🟥 Rojo", { exact: true })).toBeVisible();
+  await expect(page.getByText("🟦 Azul", { exact: true })).toBeVisible();
 });
 
 test("la aplicación comunica el movimiento con el backend", async ({ page }) => {
