@@ -1,0 +1,255 @@
+:root { 
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color: #fff;
+  background: #151a22;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:disabled { 
+  opacity: .5; 
+  cursor: not-allowed; 
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+}
+
+.topbar, .scoreboard, .instructions, .bottom {
+  padding: 12px 24px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ffffff18;
+}
+
+.eyebrow { 
+  margin: 0; font-size: 11px; 
+  letter-spacing: .2em; 
+  opacity: .55; 
+}
+h1 { 
+  margin: 2px 0 0; 
+  font-size: clamp(24px, 3vw, 40px); 
+}
+.timer { 
+  font-size: 28px; 
+  font-weight: 900; 
+}
+
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.player-card {
+  padding: 10px 16px;
+  border: 1px solid #ffffff18;
+  border-radius: 16px;
+}
+.player-card.red { 
+  border: 2px solid rgb(205, 46, 46); 
+  text-align: center;
+}
+.player-card.blue { 
+  border: 2px solid #6aa7ff; 
+  text-align: center; 
+}
+.player-card strong {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 2.5rem;
+  line-height: 1;
+}
+.player-card > span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+.stats { 
+  font-size: 12px; 
+  opacity: .7; 
+  margin-top: 4px; 
+}
+.player-card small { 
+  opacity: .55; 
+}
+.goal { 
+  font-weight: 900; 
+  opacity: .8; 
+}
+
+.instructions {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  opacity: .85;
+}
+
+.field {
+  position: relative;
+  margin: 0 18px 10px;
+  overflow: hidden;
+  border: 3px solid #3e3c33;
+  border-radius: 24px;
+  background-image: url("/images/grass.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.chicken, .player {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  user-select: none;
+}
+.chicken { 
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bob .7s ease-in-out infinite alternate; 
+}
+.chicken img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.chicken-golden { 
+  filter: drop-shadow(0 0 9px #ffe56b); 
+}
+.chicken-trick { 
+  filter: drop-shadow(0 0 7px #bf00ff); 
+}
+.player { 
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: left .08s linear, top .08s linear; 
+  filter: drop-shadow(0 4px 2px #0008); 
+}
+.player img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.field-decor { 
+  position: absolute; 
+  z-index: 2; 
+  opacity: .65; }
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.status { 
+  color: #f8dc75; 
+  font-weight: 800;
+}
+
+.game-over {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: #0009;
+  backdrop-filter: blur(5px);
+}
+.modal {
+  width: min(90%, 430px);
+  padding: 35px;
+  text-align: center;
+  border-radius: 24px;
+  background: #202832;
+  border: 1px solid #ffffff20;
+  box-shadow: 0 20px 80px #000;
+}
+.trophy {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.trophy img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.modal h2 { 
+  font-size: 32px; 
+  margin: 8px 0; 
+}
+.modal button { 
+  background: #f2cf61; 
+  color: #1b211d; 
+  margin-top: 15px; 
+}
+
+.toast {
+  position: fixed;
+  right: 18px;
+  bottom: 80px;
+  z-index: 30;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #6f3131;
+  box-shadow: 0 10px 30px #0008;
+}
+
+.error { color: #fff; }
+
+.loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  background: #151a22;
+}
+
+@keyframes bob {
+  from { transform: translate(-50%, -50%) rotate(-3deg); }
+  to { transform: translate(-50%, calc(-50% - 4px)) rotate(3deg); }
+}
+
+@media (max-width: 800px) {
+  body { overflow: auto; }
+  .app { min-height: 100vh; grid-template-rows: auto auto auto 55vh auto; }
+  .scoreboard { grid-template-columns: 1fr 1fr; }
+  .goal { grid-column: 1 / -1; grid-row: 1; text-align: center; }
+  .bottom { flex-direction: column; }
+  .capture-buttons { width: 100%; }
+  .capture-buttons button { flex: 1; }
+}
