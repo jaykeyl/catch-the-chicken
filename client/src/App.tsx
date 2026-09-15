@@ -33,8 +33,6 @@ function App() {
   const [error, setError] = useState("");
   // Teclas que estan siendo presionadas
   const keys = useRef(new Set<string>());
-  // Evita mandar muchos movimientos al servidor al mismo tiempo
-  const moveLock = useRef(false);
   // Referencia al elemento principal para darle foco
   const appRef = useRef<HTMLElement | null>(null);
 
