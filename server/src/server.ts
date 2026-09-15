@@ -138,13 +138,15 @@ function tick() {
   }
 }
 
+setInterval(tick, 250);
+
 function finishByScore() {
   game.status = "finished";
   const p1 = game.players.p1;
   const p2 = game.players.p2;
   game.winner = p1.score === p2.score ? null : p1.score > p2.score ? "p1" : "p2";
   game.message = game.winner
-    ? `${game.players[game.winner].name} ganó por puntuación.`
+    ? `El jugador ${game.players[game.winner].name} ganó por puntuación.`
     : "¡Empate! Ambos terminaron con la misma puntuación.";
 }
 
@@ -250,8 +252,8 @@ app.post("/api/game/capture", (req, res) => {
     game.message = `El jugador ${player.name} llegó a ${TARGET} puntos y ganó.`;
   } else {
     game.message = chicken.kind === "trick"
-      ? `${player.name} atrapó una gallina tramposa: -1 punto. y -10 de energia`
-      : `${player.name} capturó una gallina y ganó ${chicken.value} punto${chicken.value === 1 ? "" : "s"}.`;
+      ? `El jugador ${player.name} atrapó una gallina tramposa: -1 punto. y -10 de energia`
+      : `El jugador ${player.name} capturó una gallina y ganó ${chicken.value} punto${chicken.value === 1 ? "" : "s"}.`;
   }
 
   return res.json({ captured: true, message: game.message, state: publicGame() });
