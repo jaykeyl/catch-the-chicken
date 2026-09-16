@@ -317,7 +317,7 @@ function App() {
       {/* Cabecera */}
       <header className="topbar">
         <div>
-          <h1>Catch the Chicken!</h1>
+          <h1>Catch the Pollo!</h1>
         </div>
         <div className="timer">
           Tiempo restante: {Math.ceil(game.timeLeft)}s
